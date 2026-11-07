@@ -7,10 +7,11 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024
+DATABASE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Database.db")
 
 
 def init_db():
-    conn = sqlite3.connect("Database.db")
+    conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
     cursor.execute("""
@@ -43,8 +44,11 @@ def init_db():
     conn.close()
 
 
+init_db()
+
+
 def render_tickets(film, message=None, message_type=None, selected_seat=None, status=200):
-    conn = sqlite3.connect("Database.db")
+    conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
     cursor.execute(
         "SELECT row_number, seat_number FROM ticket_bookings WHERE film = ?",
@@ -67,7 +71,7 @@ def render_tickets(film, message=None, message_type=None, selected_seat=None, st
 
 @app.route("/")
 def index():
-    conn = sqlite3.connect("Database.db")
+    conn = sqlite3.connect(DATABASE_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute("SELECT name, genre, poster FROM movies ORDER BY id")
@@ -88,7 +92,7 @@ def index():
 
 @app.route("/movies")
 def movies():
-    conn = sqlite3.connect("Database.db")
+    conn = sqlite3.connect(DATABASE_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
@@ -100,7 +104,7 @@ def movies():
 
 @app.route("/movies/<int:movie_id>/delete", methods=["POST"])
 def delete_movie(movie_id):
-    conn = sqlite3.connect("Database.db")
+    conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
     cursor.execute("DELETE FROM movies WHERE id = ?", (movie_id,))
@@ -138,7 +142,7 @@ def add_movies():
                 os.path.join(app.static_folder, "images", poster_filename)
             )
 
-        conn = sqlite3.connect("Database.db")
+        conn = sqlite3.connect(DATABASE_PATH)
         cursor = conn.cursor()
 
         cursor.execute(
@@ -190,7 +194,7 @@ def tickets():
                 status=400
             )
 
-        conn = sqlite3.connect("Database.db")
+        conn = sqlite3.connect(DATABASE_PATH)
         cursor = conn.cursor()
         try:
             cursor.execute(
@@ -226,5 +230,4 @@ def tickets():
 
 
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True)
