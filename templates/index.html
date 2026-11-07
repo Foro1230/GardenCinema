@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Головна — Кінотеатр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="nav-wrap">
+            <img class="logo" src="{{ url_for('static', filename='images/Garden Cinema.png') }}" alt="Логотип кінотеатру">
+            <button class="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="site-navigation">☰</button>
+<nav id="site-navigation">
+    <a href="{{ url_for('index') }}">Головна</a>
+    <a href="{{ url_for('movies') }}">Фільми</a>
+    <a href="{{ url_for('add_movies') }}">Додати фільм</a>
+    <a href="{{ url_for('gallery') }}">Галерея</a>
+    <a href="{{ url_for('contacts') }}">Контакти</a>
+</nav>
+
+        </div>
+    </header>
+    <main>
+        <script id="film-data" type="application/json">{{ films | tojson }}</script>
+        <section class="hero">
+            <div class="hero-poster">
+                <button class="back" id="previous-film" type="button" aria-label="Попередній фільм">⇐</button>
+                <button class="next" id="next-film" type="button" aria-label="Наступний фільм">⇒</button>
+                <img id="featured-poster" src="{{ url_for('static', filename='images/poster.jpg') }}" data-default-src="{{ url_for('static', filename='images/poster.jpg') }}" alt="Постер із головної афіші кінотеатру">
+            </div>
+            <div>
+                <span class="tag">ГОЛОВНА ПРЕМ’ЄРА</span>
+                <h1 id="featured-title">Месники: Сходження Доктора Дума</h1>
+                <p id="featured-description">Нова велика історія всесвіту Marvel. Героям доведеться об’єднатися перед загрозою, яка змінить усе.</p>
+                <p><strong>Жанр:</strong> <span id="featured-genre">фантастика, бойовик</span></p>
+                <a class="button" id="buy-ticket" href="{{ url_for('tickets') }}">Купити квиток</a>
+            </div>
+        </section>
+        <section class="panel">
+            <h2>У нашому кінотеатрі</h2>
+            <p>Переглядай афішу, знайомся з фільмами та обирай наступний сеанс.</p>
+            <a class="button" href="{{ url_for('movies') }}">Переглянути фільми</a>
+        </section>
+    </main>
+    <footer>© 2026 Garden. Всі права захищені. Сайт перебуває під надійним захистом SSL-сертифікату.</footer>
+</body>
+</html>

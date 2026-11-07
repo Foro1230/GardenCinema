@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати фільм — Кінотеатр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header> 
+        <div class="nav-wrap">
+            <img class="logo" src="{{ url_for('static', filename='images/Garden Cinema.png') }}" alt="Логотип кінотеатру">
+            <button class="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="site-navigation">☰</button>
+
+<nav id="site-navigation">
+    <a href="{{ url_for('index') }}">Головна</a>
+    <a href="{{ url_for('movies') }}">Фільми</a>
+    <a href="{{ url_for('add_movies') }}">Додати фільм</a>
+    <a href="{{ url_for('gallery') }}">Галерея</a>
+    <a href="{{ url_for('contacts') }}">Контакти</a>
+</nav>
+
+        </div>
+    </header>
+    <main>
+        <h1>Додати фільм</h1>
+        <section class="panel">
+            {% if error %}
+            <p class="booking-message error" role="alert">{{ error }}</p>
+            {% endif %}
+            <form id="film-form" action="{{ url_for('add_movies') }}" method="post" enctype="multipart/form-data">
+                <label for="film-name">Назва фільму</label>
+                <input id="film-name" name="name" type="text" required>
+                <label for="film-genre">Жанр</label>
+                <input id="film-genre" name="genre" type="text" required>
+                <label for="film-time">Час сеансу</label>
+                <input id="film-time" name="time" type="time" required>
+                <label for="film-poster">Постер (необов’язково)</label>
+                <input id="film-poster" name="poster" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+                <button class="button" type="submit">Додати фільм</button>
+            </form>
+            <p id="form-message"></p>
+        </section>
+    </main>
+    <footer>Кінотеатр</footer>
+</body>
+</html>

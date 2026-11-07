@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея — Кінотеатр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header> 
+        <div class="nav-wrap">
+            <img class="logo" src="{{ url_for('static', filename='images/Garden Cinema.png') }}" alt="Логотип кінотеатру">
+            <button class="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="site-navigation">☰</button>
+
+<nav id="site-navigation">
+    <a href="{{ url_for('index') }}">Головна</a>
+    <a href="{{ url_for('movies') }}">Фільми</a>
+    <a href="{{ url_for('add_movies') }}">Додати фільм</a>
+    <a href="{{ url_for('gallery') }}">Галерея</a>
+    <a href="{{ url_for('contacts') }}">Контакти</a>
+</nav>
+
+        </div>
+    </header>
+    <main>
+        <h1>Галерея</h1>
+        <section class="panel">
+            <img src="{{ url_for('static', filename='images/poster.jpg') }}" alt="Постер фільму" style="width:100%;max-width:360px;display:block;">
+        </section>
+    </main>
+    <footer>Кінотеатр</footer>
+</body>
+</html>

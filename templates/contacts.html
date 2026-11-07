@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти — Кінотеатр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="nav-wrap">
+            <img class="logo" src="{{ url_for('static', filename='images/Garden Cinema.png') }}" alt="Логотип кінотеатру">
+            <button class="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="site-navigation">☰</button>
+
+<nav id="site-navigation">
+    <a href="{{ url_for('index') }}">Головна</a>
+    <a href="{{ url_for('movies') }}">Фільми</a>
+    <a href="{{ url_for('add_movies') }}">Додати фільм</a>
+    <a href="{{ url_for('gallery') }}">Галерея</a>
+    <a href="{{ url_for('contacts') }}">Контакти</a>
+</nav>
+
+        </div>
+    </header>
+    <main>
+        <h1>Контакти</h1>
+        <section class="panel">
+            <p>Адреса: центр міста</p>
+            <p>Телефон: +380 00 000 00 00</p>
+            <p>Email: cinema@example.com</p>
+        </section>
+    </main>
+    <footer>Кінотеатр</footer>
+</body>
+</html>

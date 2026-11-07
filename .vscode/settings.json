@@ -1,0 +1,23 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "workbench.colorTheme": "Dark Modern",
+    "workbench.colorCustomizations": {
+        "editor.background": "#17121F",
+        "editorGutter.background": "#17121F",
+        "sideBar.background": "#20182B",
+        "sideBarTitle.foreground": "#E8DDF5",
+        "activityBar.background": "#20182B",
+        "activityBar.foreground": "#E8DDF5",
+        "activityBar.activeBorder": "#B58AE8",
+        "titleBar.activeBackground": "#20182B",
+        "titleBar.activeForeground": "#E8DDF5",
+        "statusBar.background": "#39264F",
+        "statusBar.foreground": "#F5EEFC",
+        "panel.background": "#1D1726",
+        "tab.activeBackground": "#2B2038",
+        "tab.activeForeground": "#F5EEFC",
+        "focusBorder": "#B58AE8",
+        "button.background": "#704A91",
+        "button.hoverBackground": "#845BAB"
+    }
+}

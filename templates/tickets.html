@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Квитки — Кінотеатр</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="nav-wrap">
+            <img class="logo" src="{{ url_for('static', filename='images/Garden Cinema.png') }}" alt="Логотип кінотеатру">
+            <button class="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="site-navigation">☰</button>
+            <nav id="site-navigation">
+                <a href="{{ url_for('index') }}">Головна</a>
+                <a href="{{ url_for('movies') }}">Фільми</a>
+                <a href="{{ url_for('add_movies') }}">Додати фільм</a>
+                <a href="{{ url_for('gallery') }}">Галерея</a>
+                <a href="{{ url_for('contacts') }}">Контакти</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>Вибір місць</h1>
+        <section class="panel ticket-panel">
+            <h2>{{ film }}</h2>
+            {% if message %}
+            <p class="booking-message {{ message_type }}" role="status">{{ message }}</p>
+            {% endif %}
+            <div class="screen">ЕКРАН</div>
+            <form action="{{ url_for('tickets') }}" method="post">
+                <input type="hidden" name="film" value="{{ film }}">
+                <div class="seat-map" role="radiogroup" aria-label="Вибір ряду та місця">
+                    {% for row in rows %}
+                    <div class="seat-row">
+                        <span class="row-label">Ряд {{ row }}</span>
+                        <div class="seats">
+                            {% for seat in range(1, seats_per_row + 1) %}
+                            {% set is_booked = (row, seat) in booked_seats %}
+                            <label class="seat{% if is_booked %} seat-booked{% endif %}">
+                                <input
+                                    class="seat-input"
+                                    type="radio"
+                                    name="seat"
+                                    value="{{ row }}-{{ seat }}"
+                                    aria-label="Ряд {{ row }}, місце {{ seat }}"
+                                    required
+                                    {% if is_booked %}disabled{% endif %}
+                                    {% if selected_seat == (row, seat) %}checked{% endif %}
+                                >
+                                <span>{{ seat }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="seat-legend" aria-label="Позначення місць">
+                    <span><i class="legend-seat available"></i> Вільне</span>
+                    <span><i class="legend-seat selected"></i> Обране</span>
+                    <span><i class="legend-seat booked"></i> Зайняте</span>
+                </div>
+                <button class="button" type="submit">Підтвердити місце</button>
+            </form>
+        </section>
+    </main>
+    <footer>© 2026 Garden</footer>
+</body>
+</html>
